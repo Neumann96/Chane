@@ -10,7 +10,7 @@ import random
 
 proxy_url = 'http://proxy.server:3128'
 storage = MemoryStorage()
-bot = Bot('6015314056:AAFtEgUyx897yl9QWnc2dlJyT06KMD83iZ8')
+bot = Bot('')
 dp = Dispatcher(bot=bot, storage=storage)
 a = False
 sum = 0
