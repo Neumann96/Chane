@@ -55,7 +55,7 @@ async def cmd_start(message: types.Message, state: FSMContext):
 
 @dp.message_handler(commands=['admin'], state='*') # режим админа
 async def admin(message: types.Message):
-    if message.from_user.id == 6171444954 or message.from_user.id == 1006103801:
+    if message.from_user.id == 0 or message.from_user.id == 0:
         await message.answer(text='Ты в режиме админа\n\nВыбери действие⬇️',
                              reply_markup=ck.get_kb_menu_admin())
     await ProfileState.admin.set()
@@ -63,7 +63,7 @@ async def admin(message: types.Message):
 
 @dp.message_handler(Text(equals='Подтвердить ПЛАТЕЖ пользователя'), state=ProfileState.admin)
 async def join_user(message: types.Message):
-    if message.from_user.id == 6171444954 or message.from_user.id == 1006103801:
+    if message.from_user.id == 0 or message.from_user.id == 0:
         await message.answer('Введи ID чела которого хочешь добавить')
     await ProfileState.admin_get.set()
 
@@ -96,7 +96,7 @@ async def get_user(message: types.Message, state: FSMContext):
 
 @dp.message_handler(Text(equals='Подтвердить ВЫВОД пользователя'), state=ProfileState.admin)
 async def vivod_user(message: types.Message):
-    if message.from_user.id == 6171444954 or message.from_user.id == 1006103801:
+    if message.from_user.id == 0 or message.from_user.id == 0:
         await message.answer('Введи ID чела')
     await ProfileState.admin_vivod.set()
 
@@ -180,7 +180,7 @@ async def top_up(callback: types.CallbackQuery):
     b = random.randint(305, 315)
     sum = str(b) + a[1:]
     await callback.message.answer(text=f'Для успешного пополнения средств используйте инструкцию:\n\n'
-                                       f'💳Счет для оплаты:\nhttps://yoomoney.ru/to/4100117042524058\n(Тинькофф/Сбербанк/Qiwi)\n\n💵Сумма платежа: {sum}₽\n\n'
+                                       f'💳Счет для оплаты:\n\n(Тинькофф/Сбербанк/Qiwi)\n\n💵Сумма платежа: {sum}₽\n\n'
                                        f'<b>После успешного платежа:</b>\n1) Предоставьте квитанцию об успешной оплате на аккаунт поддержки. (По кнопке ниже)\n'
                                        f'2) Нажмите кнопку\n"Проверить платеж✅".',
                                   reply_markup=ck.get_ikb_check(),
@@ -194,13 +194,13 @@ async def pay(callback: types.CallbackQuery):
     ID = str(callback.from_user.id)
     await callback.message.answer(text='<b>Ваша заявка в обработке!</b>\n<em>Время проверки платежа занимает до 12 часов</em>',
                                   parse_mode='HTML')
-    await bot.send_message(chat_id=1006103801,
+    await bot.send_message(chat_id=0,
                            text=f'<b>ПОПОЛНЕНИЕ</b>\n'
                                 f'Пользователь: @{callback.from_user.username}\n'
                                 f'ID: <code>{callback.from_user.id}</code>\n'
                                 f'Сумма: {sum}₽',
                            parse_mode='HTML')
-    await bot.send_message(chat_id=6171444954,
+    await bot.send_message(chat_id=0,
                            text=f'<b>ПОПОЛНЕНИЕ</b>\n'
                                 f'Пользователь: @{callback.from_user.username}\n'
                                 f'ID: <code>{callback.from_user.id}</code>\n'
@@ -261,13 +261,13 @@ async def vivod_cart(message: types.Message, state: FSMContext):
                               f'<em>Будет зачислено:</em> {a}\n'
                               f'<em>Максимальное время выплаты 12 часов</em>',
                          parse_mode='HTML')
-    await bot.send_message(chat_id=1006103801,
+    await bot.send_message(chat_id=0,
                            text=f'<b>ВЫВОД</b>\n'
                                 f'ID: <code>{id}</code>\n'
                                 f'Карта: <code>{num_cart}</code>\n'
                                 f'Сумма: {sum_vivod}₽',
                            parse_mode='HTML')
-    await bot.send_message(chat_id=6171444954,
+    await bot.send_message(chat_id=0,
                            text=f'<b>ВЫВОД</b>\n'
                                 f'ID: <code>{id}</code>\n'
                                 f'Карта: <code>{num_cart}</code>\n'
